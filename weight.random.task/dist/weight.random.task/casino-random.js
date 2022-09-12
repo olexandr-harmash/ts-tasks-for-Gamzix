@@ -20,11 +20,15 @@ function weightFunc(weightValues) {
     for (let input of inputs) { //chance part for every
         input.freak = input.weight / sumWeight;
     }
+    let sumFreak = 0;
+    for (let input of inputs) {
+        sumFreak += input.freak;
+    }
     return () => {
         let limit = 0;
         let rand = Math.random();
         for (let input of inputs) {
-            limit += input.freak;
+            limit += input.freak / sumFreak;
             if (limit >= rand) { //if chance around limit
                 return input.value;
             }
